@@ -3,35 +3,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-
-const appRoutes: Routes = [
-  {path: '/heroes',  component: MainComponent},/*,
-  { path: 'hero/:id',      component: HeroDetailComponent },
-  {
-    path: '/',
-    component: MainComponent,
-    data: { title: 'Heroes List' }
-  },
-  { path: '',
-    redirectTo: '/heroes',
-    pathMatch: 'full'
-  },*/
-  //{ path: '**', component: PageNotFoundComponent }
-];
+import { routing } from './app.routes';
+import { HttpModule }    from '@angular/http';
+import { MainService } from './main/main.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent
   ],
-  imports: [
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
-    BrowserModule
+  imports: [   
+    BrowserModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [MainService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,19 @@
-<p>
-  main works!
-</p>
- <router-outlet></router-outlet>
+   <div class="row marketing">
+      <div ng-if="dataLoading" class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+      <div class="text-center" ng-show="showVideo">        
+        <video #camera autoplay></video>
+      </div>
+      <canvas #myCanvas style="display:none;" width="300" height="400"></canvas>
+    </div>    
+    <p style="display:none;" id="googleMap"></p>
+    <div id="buttons" class="row text-center">
+      <div class="col-xs-6">
+        <button class="btn btn-success" (click)="clicked()">Selfie me please</button>
+      </div>
+      <div class="col-xs-6">
+        <button class="btn btn-danger" ng-click="savePlaces(x)">Save this moment</button>
+      </div>
+    </div> 
