@@ -18,8 +18,14 @@ export class MainComponent implements OnInit {
   latitude = {}; 
   longitude = {};
   place_id = '';
-  isTrue = false;
-
+  isTrue = false;  
+  public list : any [];
+  x  = {}; 
+  image;
+  storage;
+  types;
+  lists;
+  listss;
   constructor(public _myService: MainService) {}
 
   ngOnInit() {
@@ -30,12 +36,16 @@ export class MainComponent implements OnInit {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
+    if (localStorage.list) {
+      this.storage = localStorage.list;
+      this.list = localStorage.list;
+    }
   }
   
    showPosition(position) {      
      this.latitude = position.coords.latitude;
      this.longitude = position.coords.longitude;
-     console.log(position.coords.latitude)
+     console.log(position.coords.latitude);
     }
 
   clicked() {
@@ -43,9 +53,22 @@ export class MainComponent implements OnInit {
     this._myService.getCoordinates(this.latitude, this.longitude).subscribe(co => {
       this.context.drawImage(this.video, 0, 0, 300, 400);
       this.place_id = co.results[0].formatted_address;     
-      console.log('place'  + this.place_id)
+      console.log('place'  + this.place_id);
        this.isTrue = false;
     });
+  }
+
+  savePlaces(){
+      localStorage.setItem("canvas", this.canvas.toDataURL());        
+      localStorage.setItem('currentUser', JSON.stringify(this.place_id ));      
+      this.listss = localStorage.getItem("currentUser")
+      this.image = localStorage.getItem("canvas");       
+      // this.types = this.place_id; 
+      debugger;
+      this.list.push(this.listss);
+      // localStorage.list = this.list;
+      // this.storage = this.list;  
+      // console.log(this.list, this.storage);    
   }
 
   videoStart() {
@@ -63,7 +86,7 @@ export class MainComponent implements OnInit {
         this.video.play();
       })
         .catch(function (err) {
-          console.log(err)
+          console.log(err);
         });
     }
   }
