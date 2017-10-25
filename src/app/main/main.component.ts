@@ -12,21 +12,15 @@ export class MainComponent implements OnInit {
 
   @ViewChild("myCanvas") myCanvas;
   @ViewChild("camera") camera: any;
-  context: CanvasRenderingContext2D;  
-  video: HTMLVideoElement;  
+  context: CanvasRenderingContext2D;    
   canvas: HTMLCanvasElement;
   latitude = {}; 
   longitude = {};
   place_id = '';
-  isTrue = false;  
-  public list : any [];
-  x  = {}; 
-  image;
-  storage;
-  types;
-  lists;
-  listss;
-  constructor(public _myService: MainService) {}
+  list =[];   
+
+  constructor(public _myService: MainService) {  
+  }
 
   ngOnInit() {
     this.videoStart();
@@ -35,11 +29,7 @@ export class MainComponent implements OnInit {
       n.geolocation.getCurrentPosition(this.showPosition.bind(this));    
     } else {
       console.log("Geolocation is not supported by this browser.");
-    }
-    if (localStorage.list) {
-      this.storage = localStorage.list;
-      this.list = localStorage.list;
-    }
+    }  
   }
   
    showPosition(position) {      
@@ -49,32 +39,30 @@ export class MainComponent implements OnInit {
     }
 
   clicked() {
-   this.isTrue = true;   
+   let video = this.camera.nativeElement;   
     this._myService.getCoordinates(this.latitude, this.longitude).subscribe(co => {
-      this.context.drawImage(this.video, 0, 0, 300, 400);
+      this.context.drawImage(video, 0, 0, 300, 400);
       this.place_id = co.results[0].formatted_address;     
-      console.log('place'  + this.place_id);
-       this.isTrue = false;
+      console.log(this.place_id);  
     });
   }
 
   savePlaces(){
       localStorage.setItem("canvas", this.canvas.toDataURL());        
-      localStorage.setItem('currentUser', JSON.stringify(this.place_id ));      
-      this.listss = localStorage.getItem("currentUser")
-      this.image = localStorage.getItem("canvas");       
-      // this.types = this.place_id; 
-      debugger;
-      this.list.push(this.listss);
+      localStorage.setItem('currentUser', this.place_id );      
+      let lists = localStorage.getItem("currentUser")
+      let image = localStorage.getItem("canvas");       
+      // this.types = this.place_id;  
+      this.list.push(image);   
+      console.log(this.list)
       // localStorage.list = this.list;
       // this.storage = this.list;  
       // console.log(this.list, this.storage);    
   }
 
   videoStart() {
-
     this.canvas = this.myCanvas.nativeElement;
-    this.video = this.camera.nativeElement;
+    let video = this.camera.nativeElement;
     this.context = this.canvas.getContext("2d");
     let ctx = this.context;
     let n = <any>navigator;
@@ -82,8 +70,8 @@ export class MainComponent implements OnInit {
     n.getUserMedia = (n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia || n.msGetUserMedia);
     if (n.mediaDevices && n.mediaDevices.getUserMedia) {
       n.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-        this.video.src = window.URL.createObjectURL(stream);
-        this.video.play();
+        video.src = window.URL.createObjectURL(stream);
+        video.play();
       })
         .catch(function (err) {
           console.log(err);
