@@ -28,9 +28,11 @@ export class MainComponent implements OnInit {
   clicked() {
     let n = <any>navigator;
     let latitude;
-    let longitude;
-    if (n.geolocation) {
-      n.geolocation.getCurrentPosition(showPosition);      
+    let longitude;    
+
+     if (n.geolocation) {
+      n.geolocation.getCurrentPosition(showPosition);    
+
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
