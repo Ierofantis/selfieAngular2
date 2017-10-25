@@ -7,7 +7,7 @@ import { MainService } from './main.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
   providers: []
-  
+
 })
 export class MainComponent implements OnInit {
 
@@ -19,44 +19,39 @@ export class MainComponent implements OnInit {
   latitude;
 
 
-  constructor(public _myService: MainService) {
-    
-  }
+  constructor(public _myService: MainService) {}
 
   ngOnInit() {
-    this.videoStart();      
-  } 
+    this.videoStart();
+  }
 
-  clicked(){
+  clicked() {
     let n = <any>navigator;
     let latitude;
     let longitude;
-     if (n.geolocation) {
-      n.geolocation.getCurrentPosition(showPosition);
-    // console.log('s')
+    if (n.geolocation) {
+      n.geolocation.getCurrentPosition(showPosition);      
     } else {
       console.log("Geolocation is not supported by this browser.");
-    }  
+    }
 
-     function showPosition(position) {
+    function showPosition(position) {
 
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
-     }    
+    }
 
-     this._myService.getCoordinates(latitude,longitude).subscribe(co => {
-     console.log(co)
-   });     
+    this._myService.getCoordinates(latitude, longitude).subscribe(co => {
+      console.log(co)
+    });
   }
-
-
 
   videoStart() {
 
     let canvas = this.myCanvas.nativeElement;
-    let video = this.camera.nativeElement;    
+    let video = this.camera.nativeElement;
     this.context = canvas.getContext("2d");
-    let ctx = this.context;    
+    let ctx = this.context;
     let n = <any>navigator;
 
     n.getUserMedia = (n.getUserMedia || n.webkitGetUserMedia || n.mozGetUserMedia || n.msGetUserMedia);
