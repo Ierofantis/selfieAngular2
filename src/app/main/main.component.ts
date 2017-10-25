@@ -18,12 +18,15 @@ export class MainComponent implements OnInit {
   longitude = {};
   place_id = '';
   list =[];   
+  data;
 
   constructor(public _myService: MainService) {  
   }
 
   ngOnInit() {
-    this.videoStart();
+    this.videoStart();  
+    let retrievedData =localStorage.getItem("quentinTarantino"); 
+      this.data = JSON.parse(retrievedData);
     let n = <any>navigator; 
      if (n.geolocation) {
       n.geolocation.getCurrentPosition(this.showPosition.bind(this));    
@@ -48,13 +51,19 @@ export class MainComponent implements OnInit {
   }
 
   savePlaces(){
-      localStorage.setItem("canvas", this.canvas.toDataURL());        
-      localStorage.setItem('currentUser', this.place_id );      
-      let lists = localStorage.getItem("currentUser")
-      let image = localStorage.getItem("canvas");       
+
+      //localStorage.setItem("canvas", this.canvas.toDataURL());        
+      //localStorage.setItem('currentUser', this.place_id );      
+      //let lists = localStorage.getItem("currentUser")
+      //let image = localStorage.getItem("canvas");       
       // this.types = this.place_id;  
-      this.list.push(image);   
-      console.log(this.list)
+      this.list.push(this.canvas.toDataURL());
+      localStorage.setItem("quentinTarantino", JSON.stringify(this.list)); 
+      let retrievedData =localStorage.getItem("quentinTarantino"); 
+      this.data = JSON.parse(retrievedData); 
+      
+      
+      //console.log(retrievedData)
       // localStorage.list = this.list;
       // this.storage = this.list;  
       // console.log(this.list, this.storage);    
