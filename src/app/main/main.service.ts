@@ -16,8 +16,6 @@ constructor (private http: Http) {
       var path = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + long + '&key=AIzaSyCHf2EeOg7T167gSkNU_ljDPetPXysSMFg';
    
 
-    return this.http.get(PROXY_URL + path).map(res => res.json());
-        
-    }
-    
+    return this.http.get(PROXY_URL + path).map(res => res.json());        
+    }    
 }

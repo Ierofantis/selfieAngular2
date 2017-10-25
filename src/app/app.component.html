@@ -23,16 +23,17 @@
         </div>
         <div class="collapse navbar-collapse" id="js-navbar-collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#/!">Home</a></li>
-            <li><a href="#!MyPlaces">My Places</a></li>
+            <li><a [routerLink] = "['/Home']" routerLinkActive="active">Home</a></li>
+            <li><a [routerLink] = "['/MyPlaces']" routerLinkActive="active">My Places</a></li>
             <li><a href="https://github.com/Ierofantis" target="_blank">Contact</a></li>
-          </ul>
+             
+          </ul>        
         </div>
       </div>
     </div>
   </div>
   <div class="container">
-    <app-main></app-main>
+    <router-outlet></router-outlet>
   </div>
   <div class="footer">
     <div class="container">

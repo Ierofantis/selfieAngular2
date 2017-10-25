@@ -1,5 +1,5 @@
    <div class="row marketing">
-      <div ng-if="dataLoading" class="spinner">
+      <div *ngIf="isTrue" class="spinner">
         <div class="double-bounce1"></div>
         <div class="double-bounce2"></div>
       </div>
@@ -17,3 +17,4 @@
         <button class="btn btn-danger" ng-click="savePlaces(x)">Save this moment</button>
       </div>
     </div> 
+     
