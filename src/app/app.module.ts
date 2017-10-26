@@ -3,14 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
-//import { routing } from './app.routes';
-import { HttpModule }    from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { MainService } from './main/main.service';
 import { MyPlacesComponent } from './my-places/my-places.component';
 
 const appRoutes: Routes = [
-   { path: 'Home', component: MainComponent },
-   { path: 'MyPlaces', component: MyPlacesComponent },
+  { path: 'Home', component: MainComponent },
+  { path: 'MyPlaces', component: MyPlacesComponent },
 ];
 
 @NgModule({
@@ -19,9 +18,10 @@ const appRoutes: Routes = [
     MainComponent,
     MyPlacesComponent
   ],
-  imports: [   
+   exports: [MainComponent],
+  imports: [
     [BrowserModule,
-    RouterModule.forRoot(appRoutes)],
+      RouterModule.forRoot(appRoutes)],
     HttpModule
   ],
   providers: [MainService],

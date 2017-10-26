@@ -1,15 +1,15 @@
 <div class="row marketing">
-      <div >
-        <div class="pin">
-         <span class="glyphicon glyphicon-remove" ng-click="deletePlaces($index)"></span>
-          <img src="" />
-          <p>
-            I took this photo on {{storage}} 
-            <button type="button" class="btn btn-default btn-sm" ng-click="downloads(item.image)">
+  <div *ngFor=" let value of data ">
+    <div class="pin">
+      <span class="glyphicon glyphicon-remove" ng-click="deletePlaces($index)"></span>
+      <img src="{{value}}" />
+      <p>
+        I took this photo on {{storage}}
+        <button type="button" class="btn btn-default btn-sm" ng-click="downloads(item.image)">
               <span class="glyphicon glyphicon-download"></span>
             </button>
-          </p>
-        </div>
-      </div>
+      </p>
+    </div>
+  </div>
 </div>
- {{listss}}
+
