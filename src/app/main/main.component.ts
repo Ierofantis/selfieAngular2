@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   longitude = {};
   place_id = '';
   isTrue = false;  
-  public list : any [];
+  blist = [];
   x  = {}; 
   image;
   storage;
@@ -38,14 +38,13 @@ export class MainComponent implements OnInit {
     }
     if (localStorage.list) {
       this.storage = localStorage.list;
-      this.list = localStorage.list;
+      this.blist = localStorage.list;
     }
   }
   
    showPosition(position) {      
      this.latitude = position.coords.latitude;
-     this.longitude = position.coords.longitude;
-     console.log(position.coords.latitude);
+     this.longitude = position.coords.longitude;   
     }
 
   clicked() {
@@ -53,7 +52,6 @@ export class MainComponent implements OnInit {
     this._myService.getCoordinates(this.latitude, this.longitude).subscribe(co => {
       this.context.drawImage(this.video, 0, 0, 300, 400);
       this.place_id = co.results[0].formatted_address;     
-      console.log('place'  + this.place_id);
        this.isTrue = false;
     });
   }
@@ -63,9 +61,9 @@ export class MainComponent implements OnInit {
       localStorage.setItem('currentUser', JSON.stringify(this.place_id ));      
       this.listss = localStorage.getItem("currentUser")
       this.image = localStorage.getItem("canvas");       
-      // this.types = this.place_id; 
-      debugger;
-      this.list.push(this.listss);
+      // this.types = this.place_id;      
+      this.blist.push(this.listss);
+      console.log(this.blist)
       // localStorage.list = this.list;
       // this.storage = this.list;  
       // console.log(this.list, this.storage);    
