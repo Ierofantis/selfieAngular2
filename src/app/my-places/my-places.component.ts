@@ -12,10 +12,13 @@ import { NgModule } from '@angular/core';
 })
 export class MyPlacesComponent implements OnInit {
     data;
+    currentItem;
 
   constructor() {}
   ngOnInit() {
-  let retrievedData = localStorage.getItem("quentinTarantino");
-  this.data = JSON.parse(retrievedData);
+      this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
+    this.data = this.currentItem;
+  // let retrievedData = localStorage.getItem("quentinTarantino");
+  // this.data = JSON.parse(retrievedData);
   }
 }

@@ -18,8 +18,10 @@ export class MainComponent implements OnInit {
   longitude = {};
   place_id = '';
   list = [];
-  data;
+  data :any;
+  currentItem:string;
   location: Location;
+  newTodo:string;
 
 
 
@@ -28,9 +30,9 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.videoStart();
-    let retrievedData = localStorage.getItem("quentinTarantino");
-    this.data = JSON.parse(retrievedData);
+    this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
+    this.data = this.currentItem;
+    this.videoStart();   
     let n = <any>navigator;
     if (n.geolocation) {
       n.geolocation.getCurrentPosition(this.showPosition.bind(this));
@@ -54,13 +56,19 @@ export class MainComponent implements OnInit {
     });
   }
 
-  savePlaces() {
+  savePlaces(x) {
+       this.data.push({
+            newTodo: this.newTodo,
+            done: false
+        });
+        this.newTodo = this.canvas.toDataURL();
+        localStorage.setItem('quentinTarantino', JSON.stringify(this.data));
 
-    this.list.push(this.canvas.toDataURL());
-    localStorage.setItem("quentinTarantino", JSON.stringify(this.list));
-    let retrievedData = localStorage.getItem("quentinTarantino");
-    this.data = JSON.parse(retrievedData);
-    this.router.navigate(['/MyPlaces']);
+    // this.list.push(this.canvas.toDataURL());
+    // localStorage.setItem("quentinTarantino", JSON.stringify(this.list));
+    // let retrievedData = localStorage.getItem("quentinTarantino");
+    // this.data = JSON.parse(retrievedData);
+    // this.router.navigate(['/MyPlaces']);
   }
 
   videoStart() {
