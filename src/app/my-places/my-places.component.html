@@ -1,7 +1,7 @@
 <div class="row marketing">
   <div *ngFor=" let value of data ">
     <div class="pin">
-      <span class="glyphicon glyphicon-remove" ng-click="deletePlaces($index)"></span>
+      <span class="glyphicon glyphicon-remove" (click)="deletePlaces(x)"></span>
       <img src="{{value}}" />
       <p>
         I took this photo on {{storage}}

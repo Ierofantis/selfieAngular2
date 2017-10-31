@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
   data :any;
   currentItem:string;
   location: Location;
-  newTodo:string;
+  //newTodo:string;
 
 
 
@@ -30,8 +30,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
     this.data = this.currentItem;
+    //console.log('data'+this.data)
     this.videoStart();   
     let n = <any>navigator;
     if (n.geolocation) {
@@ -57,19 +59,18 @@ export class MainComponent implements OnInit {
   }
 
   savePlaces(x) {
-       this.data.push({
-            newTodo: this.newTodo,
-            done: false
-        });
-        this.newTodo = this.canvas.toDataURL();
+       this.data.push( this.canvas.toDataURL());
+       // this.newTodo = this.canvas.toDataURL();
         localStorage.setItem('quentinTarantino', JSON.stringify(this.data));
 
     // this.list.push(this.canvas.toDataURL());
     // localStorage.setItem("quentinTarantino", JSON.stringify(this.list));
     // let retrievedData = localStorage.getItem("quentinTarantino");
     // this.data = JSON.parse(retrievedData);
-    // this.router.navigate(['/MyPlaces']);
+        this.router.navigate(['/MyPlaces']);
   }
+
+
 
   videoStart() {
     this.canvas = this.myCanvas.nativeElement;

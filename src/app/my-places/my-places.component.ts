@@ -14,9 +14,14 @@ export class MyPlacesComponent implements OnInit {
     data;
     currentItem;
 
+    deletePlaces(x) {
+      this.data.splice(x, 1);
+      localStorage.removeItem('quentinTarantino');
+    }
+
   constructor() {}
   ngOnInit() {
-      this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
+    this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
     this.data = this.currentItem;
   // let retrievedData = localStorage.getItem("quentinTarantino");
   // this.data = JSON.parse(retrievedData);
