@@ -23,7 +23,5 @@ export class MyPlacesComponent implements OnInit {
   ngOnInit() {
     this.currentItem = (localStorage.getItem('quentinTarantino')!==null) ? JSON.parse(localStorage.getItem('quentinTarantino')) : [  ];
     this.data = this.currentItem;
-  // let retrievedData = localStorage.getItem("quentinTarantino");
-  // this.data = JSON.parse(retrievedData);
   }
 }
